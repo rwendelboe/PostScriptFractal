@@ -1,0 +1,31 @@
+% Don't forget to document your code - brief description, inputs, outputs, and example usage
+% Author: Roman Wendelboe
+% Effect: Fractal that draws a slender or bushy tree-like object at higher dimensions
+% Example: 2 fractal 
+/fractal 
+{ 
+	3 dict 				%Create a local dictionary 
+	begin
+	/d exch def 		%Define how many dimensions there are 
+	/y 75 def 			%Define a variable 
+	
+	0 0 moveto 			%Set the starting point to the origin
+	d 0 gt 				%Compare the dimension with zero to see when to stop recursion 
+	{
+		gsave 			%Save the state 
+		/d d 1 sub def	%Decrees the dimensions 
+		0 y lineto		%Draw the line 
+		0 y translate 	%Move the origin to a new spot 
+		.75 .75 scale 	%Change the size of the line
+		-45 rotate 		%Rotate the line 
+		d fractal 		%Recursively calling the function
+		45 rotate 		%Rotate the line
+		d fractal 		%Recursively calling the function
+		45 rotate 		%Rotate the line
+		d fractal 		%Recursively calling the function
+		grestore 		%Restore the saved state 
+	}if
+	8 setlinewidth 		%Set the width of the line
+	stroke 				%Draw the line 
+	end
+} def
